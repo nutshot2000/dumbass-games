@@ -139,10 +139,15 @@ function trackPageView() {
 function setupCookieConsent() {
     // Check if user has already consented
     const consentStatus = localStorage.getItem('cookieConsent');
-    if (consentStatus === 'accepted' || consentStatus === 'rejected') {
+    if (consentStatus === 'accepted' || consentStatus === 'rejected' || consentStatus === 'customized') {
         // If they rejected cookies, we should still respect their choice but not load analytics
         if (consentStatus === 'rejected') {
             disableAnalytics();
+        }
+        // Hide the banner immediately if consent was already given
+        const cookieConsent = document.getElementById('cookieConsent');
+        if (cookieConsent) {
+            cookieConsent.style.display = 'none';
         }
         return;
     }
@@ -151,40 +156,55 @@ function setupCookieConsent() {
     const cookieConsent = document.getElementById('cookieConsent');
     if (!cookieConsent) return;
     
-    // Show with animation
+    // Make sure the banner is visible and properly positioned initially
+    cookieConsent.style.transform = 'translateY(100%)';
+    cookieConsent.style.display = 'block';
+    
+    // Show with animation after a delay
     setTimeout(() => {
         cookieConsent.style.transform = 'translateY(0)';
     }, 1000);
     
+    // Function to handle consent choice
+    const handleConsent = (choice) => {
+        localStorage.setItem('cookieConsent', choice);
+        
+        if (choice === 'accepted' || choice === 'customized') {
+            enableAnalytics();
+        } else if (choice === 'rejected') {
+            disableAnalytics();
+        }
+        
+        // Hide the banner
+        cookieConsent.style.transform = 'translateY(100%)';
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            cookieConsent.style.display = 'none';
+        }, 500);
+    };
+    
     // Setup event listeners
-    document.getElementById('cookie-accept').addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'accepted');
-        enableAnalytics();
-        cookieConsent.style.transform = 'translateY(100%)';
-        setTimeout(() => {
-            cookieConsent.style.display = 'none';
-        }, 500);
-    });
+    const acceptButton = document.getElementById('cookie-accept');
+    const settingsButton = document.getElementById('cookie-settings');
+    const rejectButton = document.getElementById('cookie-reject');
     
-    document.getElementById('cookie-settings').addEventListener('click', () => {
-        // In a real implementation, this would open a modal with cookie settings
-        alert('Cookie settings would be shown here with options for necessary, analytics, and advertising cookies.');
-        // For now, just accept cookies for demo purposes
-        localStorage.setItem('cookieConsent', 'customized');
-        cookieConsent.style.transform = 'translateY(100%)';
-        setTimeout(() => {
-            cookieConsent.style.display = 'none';
-        }, 500);
-    });
+    if (acceptButton) {
+        acceptButton.addEventListener('click', () => handleConsent('accepted'));
+    }
     
-    document.getElementById('cookie-reject').addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'rejected');
-        disableAnalytics();
-        cookieConsent.style.transform = 'translateY(100%)';
-        setTimeout(() => {
-            cookieConsent.style.display = 'none';
-        }, 500);
-    });
+    if (settingsButton) {
+        settingsButton.addEventListener('click', () => {
+            // In a real implementation, this would open a modal with cookie settings
+            alert('Cookie settings would be shown here with options for necessary, analytics, and advertising cookies.');
+            // For demo purposes, treat it as customized consent
+            handleConsent('customized');
+        });
+    }
+    
+    if (rejectButton) {
+        rejectButton.addEventListener('click', () => handleConsent('rejected'));
+    }
 }
 
 // Functions for managing analytics based on consent
