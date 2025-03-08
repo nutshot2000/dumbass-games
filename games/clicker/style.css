@@ -45,12 +45,12 @@ a:hover {
 /* Header */
 header {
     background-color: var(--darker-bg);
-    color: var(--primary-color);
+    color: var(--text-color);
     text-align: center;
-    padding: 2rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
 }
 
 .header-content {
@@ -70,15 +70,32 @@ header::before {
 }
 
 header h1 {
-    font-size: 3.5rem;
+    color: var(--primary-color);
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     animation: fadeInDown 1s ease;
 }
 
 header p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
     animation: fadeInUp 1s ease;
+}
+
+/* Header tools (share/bookmark) adjustments */
+.header-tools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.header-tools-button {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
 }
 
 /* Navigation */
