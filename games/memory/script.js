@@ -530,39 +530,72 @@ document.addEventListener('DOMContentLoaded', () => {
 // Cookie consent banner
 function setupCookieConsent() {
     // Check if user has already consented
-    if (!localStorage.getItem('cookieConsent')) {
-        // Create cookie consent banner
-        const consentBanner = document.createElement('div');
-        consentBanner.className = 'cookie-consent';
-        consentBanner.innerHTML = `
-            <div class="cookie-text">
-                <p>This website uses cookies to ensure you get the best experience on our website and to show personalized ads. 
-                By continuing to use this site, you consent to our use of cookies. <a href="../../cookies.html">Learn more</a></p>
-            </div>
-            <div class="cookie-buttons">
-                <button id="cookie-accept">Accept All</button>
-                <button id="cookie-settings">Cookie Settings</button>
-            </div>
-        `;
+    const consentStatus = localStorage.getItem('cookieConsent');
+    if (consentStatus === 'accepted' || consentStatus === 'rejected' || consentStatus === 'customized') {
+        // If they rejected cookies, we should still respect their choice but not load analytics
+        if (consentStatus === 'rejected') {
+            // Disable analytics if implemented
+        }
+        // Hide the banner immediately if consent was already given
+        const cookieConsent = document.getElementById('cookieConsent');
+        if (cookieConsent) {
+            cookieConsent.style.display = 'none';
+        }
+        return;
+    }
+    
+    // Get the cookie consent element from the page
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!cookieConsent) return;
+    
+    // Make sure the banner is visible and properly positioned initially
+    cookieConsent.style.transform = 'translateY(100%)';
+    cookieConsent.style.display = 'block';
+    
+    // Show with animation after a delay
+    setTimeout(() => {
+        cookieConsent.style.transform = 'translateY(0)';
+    }, 1000);
+    
+    // Function to handle consent choice
+    const handleConsent = (choice) => {
+        localStorage.setItem('cookieConsent', choice);
         
-        document.body.appendChild(consentBanner);
+        if (choice === 'accepted' || choice === 'customized') {
+            // Enable analytics if implemented
+        } else if (choice === 'rejected') {
+            // Disable analytics if implemented
+        }
         
-        // Handle accept button
-        document.getElementById('cookie-accept').addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'accepted');
-            localStorage.setItem('cookiePreferences', JSON.stringify({
-                necessary: true,
-                analytics: true,
-                advertising: true
-            }));
-            consentBanner.remove();
+        // Hide the banner
+        cookieConsent.style.transform = 'translateY(100%)';
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            cookieConsent.style.display = 'none';
+        }, 500);
+    };
+    
+    // Setup event listeners
+    const acceptButton = document.getElementById('cookie-accept');
+    const settingsButton = document.getElementById('cookie-settings');
+    const rejectButton = document.getElementById('cookie-reject');
+    
+    if (acceptButton) {
+        acceptButton.addEventListener('click', () => handleConsent('accepted'));
+    }
+    
+    if (settingsButton) {
+        settingsButton.addEventListener('click', () => {
+            // In a real implementation, this would open a modal with cookie settings
+            alert('Cookie settings would be shown here with options for necessary, analytics, and advertising cookies.');
+            // For demo purposes, treat it as customized consent
+            handleConsent('customized');
         });
-        
-        // Handle settings button
-        document.getElementById('cookie-settings').addEventListener('click', () => {
-            showCookieSettings();
-            consentBanner.remove();
-        });
+    }
+    
+    if (rejectButton) {
+        rejectButton.addEventListener('click', () => handleConsent('rejected'));
     }
 }
 

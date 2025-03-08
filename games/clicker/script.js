@@ -484,199 +484,71 @@ document.addEventListener('DOMContentLoaded', () => {
 // Cookie consent banner
 function setupCookieConsent() {
     // Check if user has already consented
-    if (!localStorage.getItem('cookieConsent')) {
-        // Create cookie consent banner
-        const consentBanner = document.createElement('div');
-        consentBanner.className = 'cookie-consent';
-        consentBanner.innerHTML = `
-            <div class="cookie-text">
-                <p>This website uses cookies to ensure you get the best experience on our website and to show personalized ads. 
-                By continuing to use this site, you consent to our use of cookies. <a href="../../cookies.html">Learn more</a></p>
-            </div>
-            <div class="cookie-buttons">
-                <button id="cookie-accept">Accept All</button>
-                <button id="cookie-settings">Cookie Settings</button>
-            </div>
-        `;
+    const consentStatus = localStorage.getItem('cookieConsent');
+    if (consentStatus === 'accepted' || consentStatus === 'rejected' || consentStatus === 'customized') {
+        // If they rejected cookies, we should still respect their choice but not load analytics
+        if (consentStatus === 'rejected') {
+            // Disable analytics if implemented
+        }
+        // Hide the banner immediately if consent was already given
+        const cookieConsent = document.getElementById('cookieConsent');
+        if (cookieConsent) {
+            cookieConsent.style.display = 'none';
+        }
+        return;
+    }
+    
+    // Get the cookie consent element from the page
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!cookieConsent) return;
+    
+    // Make sure the banner is visible and properly positioned initially
+    cookieConsent.style.transform = 'translateY(100%)';
+    cookieConsent.style.display = 'block';
+    
+    // Show with animation after a delay
+    setTimeout(() => {
+        cookieConsent.style.transform = 'translateY(0)';
+    }, 1000);
+    
+    // Function to handle consent choice
+    const handleConsent = (choice) => {
+        localStorage.setItem('cookieConsent', choice);
         
-        document.body.appendChild(consentBanner);
+        if (choice === 'accepted' || choice === 'customized') {
+            // Enable analytics if implemented
+        } else if (choice === 'rejected') {
+            // Disable analytics if implemented
+        }
         
-        // Handle accept button
-        document.getElementById('cookie-accept').addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'accepted');
-            localStorage.setItem('cookiePreferences', JSON.stringify({
-                necessary: true,
-                analytics: true,
-                advertising: true
-            }));
-            consentBanner.remove();
-        });
+        // Hide the banner
+        cookieConsent.style.transform = 'translateY(100%)';
         
-        // Handle settings button
-        document.getElementById('cookie-settings').addEventListener('click', () => {
-            showCookieSettings();
-            consentBanner.remove();
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            cookieConsent.style.display = 'none';
+        }, 500);
+    };
+    
+    // Setup event listeners
+    const acceptButton = document.getElementById('cookie-accept');
+    const settingsButton = document.getElementById('cookie-settings');
+    const rejectButton = document.getElementById('cookie-reject');
+    
+    if (acceptButton) {
+        acceptButton.addEventListener('click', () => handleConsent('accepted'));
+    }
+    
+    if (settingsButton) {
+        settingsButton.addEventListener('click', () => {
+            // In a real implementation, this would open a modal with cookie settings
+            alert('Cookie settings would be shown here with options for necessary, analytics, and advertising cookies.');
+            // For demo purposes, treat it as customized consent
+            handleConsent('customized');
         });
     }
-}
-
-// Show detailed cookie settings
-function showCookieSettings() {
-    const settingsModal = document.createElement('div');
-    settingsModal.className = 'cookie-settings-modal';
     
-    const currentPreferences = JSON.parse(localStorage.getItem('cookiePreferences') || '{"necessary":true,"analytics":false,"advertising":false}');
-    
-    settingsModal.innerHTML = `
-        <div class="cookie-settings-content">
-            <h2>Cookie Settings</h2>
-            <p>Manage your cookie preferences below. Necessary cookies cannot be disabled as they are required for the website to function properly.</p>
-            
-            <div class="cookie-option">
-                <label>
-                    <input type="checkbox" id="necessary-cookies" checked disabled>
-                    <span>Necessary Cookies</span>
-                </label>
-                <p>These cookies are required for the website to function and cannot be disabled.</p>
-            </div>
-            
-            <div class="cookie-option">
-                <label>
-                    <input type="checkbox" id="analytics-cookies" ${currentPreferences.analytics ? 'checked' : ''}>
-                    <span>Analytics Cookies</span>
-                </label>
-                <p>These cookies help us understand how visitors interact with our website.</p>
-            </div>
-            
-            <div class="cookie-option">
-                <label>
-                    <input type="checkbox" id="advertising-cookies" ${currentPreferences.advertising ? 'checked' : ''}>
-                    <span>Advertising Cookies</span>
-                </label>
-                <p>These cookies are used to show you relevant advertisements on and off our website.</p>
-            </div>
-            
-            <div class="cookie-settings-buttons">
-                <button id="save-preferences">Save Preferences</button>
-                <button id="accept-all">Accept All</button>
-            </div>
-        </div>
-    `;
-    
-    // Add styles for the modal
-    const style = document.createElement('style');
-    style.textContent = `
-        .cookie-settings-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-        }
-        
-        .cookie-settings-content {
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .cookie-settings-content h2 {
-            color: #4ecdc4;
-            margin-bottom: 1rem;
-        }
-        
-        .cookie-option {
-            margin: 1.5rem 0;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #333;
-        }
-        
-        .cookie-option label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-        
-        .cookie-option input {
-            margin-right: 0.5rem;
-        }
-        
-        .cookie-settings-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .cookie-settings-buttons button {
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        #save-preferences {
-            background-color: #333;
-            color: white;
-        }
-        
-        #accept-all {
-            background-color: #4ecdc4;
-            color: white;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
-        .pulse {
-            animation: pulse 1s infinite;
-        }
-    `;
-    
-    document.head.appendChild(style);
-    document.body.appendChild(settingsModal);
-    
-    // Handle save preferences button
-    document.getElementById('save-preferences').addEventListener('click', () => {
-        const preferences = {
-            necessary: true,
-            analytics: document.getElementById('analytics-cookies').checked,
-            advertising: document.getElementById('advertising-cookies').checked
-        };
-        
-        localStorage.setItem('cookieConsent', 'customized');
-        localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
-        settingsModal.remove();
-    });
-    
-    // Handle accept all button
-    document.getElementById('accept-all').addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'accepted');
-        localStorage.setItem('cookiePreferences', JSON.stringify({
-            necessary: true,
-            analytics: true,
-            advertising: true
-        }));
-        settingsModal.remove();
-    });
+    if (rejectButton) {
+        rejectButton.addEventListener('click', () => handleConsent('rejected'));
+    }
 } 
