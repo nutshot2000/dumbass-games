@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://dumbassgames.xyz/games/whackamole/index.html</loc>
+    <lastmod>2025-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://dumbassgames.xyz/privacy-policy.html</loc>
     <lastmod>2025-03-08</lastmod>
     <changefreq>yearly</changefreq>
