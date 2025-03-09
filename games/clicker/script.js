@@ -267,6 +267,49 @@ document.addEventListener('DOMContentLoaded', () => {
                     postGameAd.classList.remove('visible');
                 }, 8000);
             }
+            
+            // Save the score to high scores
+            // Check if parent window's promptAndSaveScore function exists
+            if (window.parent && window.parent.promptAndSaveScore) {
+                // Call the parent window's function
+                window.parent.promptAndSaveScore("Clicker Game", this.score);
+            } else if (window.promptAndSaveScore) {
+                // Call local function if it exists
+                window.promptAndSaveScore("Clicker Game", this.score);
+            } else {
+                // Fallback: Create our own function if parent doesn't have it
+                let playerName = prompt(`Game Over! You scored ${this.score}! Enter your name:`, "Player");
+                if (playerName === null || playerName.trim() === '') {
+                    playerName = "Anonymous";
+                }
+                
+                // Create score object
+                const scoreObj = {
+                    name: playerName,
+                    score: this.score,
+                    date: new Date().toISOString()
+                };
+                
+                // Get existing scores
+                let highScores = JSON.parse(localStorage.getItem('highScores')) || {};
+                if (!highScores["Clicker Game"]) {
+                    highScores["Clicker Game"] = [];
+                }
+                
+                // Add new score
+                highScores["Clicker Game"].push(scoreObj);
+                
+                // Sort scores (higher is better)
+                highScores["Clicker Game"].sort((a, b) => b.score - a.score);
+                
+                // Keep only top 10
+                if (highScores["Clicker Game"].length > 10) {
+                    highScores["Clicker Game"] = highScores["Clicker Game"].slice(0, 10);
+                }
+                
+                // Save back to localStorage
+                localStorage.setItem('highScores', JSON.stringify(highScores));
+            }
         }
         
         /**

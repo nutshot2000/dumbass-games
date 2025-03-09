@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole Game - Dumbass Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <meta name="description" content="Play the classic Whack-a-Mole game! Test your reflexes by whacking as many moles as you can before time runs out.">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="whack a mole, browser game, classic arcade game, reflex game, reaction time">
+    <meta name="author" content="Dumbass Games">
+    <meta property="og:title" content="Whack-a-Mole Game - Dumbass Games">
+    <meta property="og:description" content="Play the classic Whack-a-Mole game! Test your reflexes by whacking as many moles as you can before time runs out.">
+    <meta property="og:image" content="https://dumbassgames.xyz/images/whackamole-game.png">
+    <meta property="og:url" content="https://dumbassgames.xyz/games/whackamole/index.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Google AdSense Script - IMPORTANT: Replace with your actual AdSense code when approved -->
+    <!-- Format: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Google Analytics - IMPORTANT: Replace with your actual Analytics ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Structured Data for better SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Game",
+        "name": "Whack-a-Mole Game",
+        "description": "Play the classic Whack-a-Mole game! Test your reflexes by whacking as many moles as you can before time runs out.",
+        "genre": ["Arcade", "Reflex", "Classic Game"],
+        "gamePlayMode": "SinglePlayer",
+        "applicationCategory": "BrowserGame",
+        "url": "https://dumbassgames.xyz/games/whackamole/index.html",
+        "author": {
+            "@type": "Organization",
+            "name": "Dumbass Games",
+            "url": "https://dumbassgames.xyz"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>This website uses cookies to ensure you get the best experience on our website.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="cookie-button accept">Accept</button>
+                <button id="cookie-reject" class="cookie-button reject">Reject</button>
+                <button id="cookie-settings" class="cookie-button settings">Cookie Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Dumbass Games</a>
+            <div class="nav-links">
+                <a href="../../index.html#games">Games</a>
+                <a href="../../index.html#about">About</a>
+                <a href="../../index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="game-container" id="gameContainer">
+            <div class="game-header">
+                <h1>Whack-a-Mole</h1>
+                <div class="game-info">
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <h2>Score</h2>
+                            <p id="score">0</p>
+                        </div>
+                        <div class="stat-item">
+                            <h2>Time</h2>
+                            <p id="time">30</p>
+                        </div>
+                        <div class="stat-item">
+                            <h2>High Score</h2>
+                            <p id="highScore">0</p>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button id="startButton" class="control-button">Start Game</button>
+                        <button id="resetButton" class="control-button">Reset</button>
+                        <a href="../../index.html" class="control-button home-button">Home</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-board">
+                <div class="mole-grid">
+                    <div class="hole" id="hole0">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole1">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole2">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole3">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole4">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole5">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole6">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole7">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hole" id="hole8">
+                        <div class="mole">
+                            <div class="mole-face">
+                                <div class="mole-nose"></div>
+                                <div class="mole-mouth"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="overlay">
+                <div class="overlay-content">
+                    <h2>Game Over!</h2>
+                    <p>Your score: <span id="finalScore">0</span></p>
+                    <p>High score: <span id="finalHighScore">0</span></p>
+                    <button id="restartButton" class="control-button">Play Again</button>
+                    <a href="../../index.html" class="control-button">Back to Home</a>
+                    
+                    <!-- Social Share Buttons -->
+                    <div class="share-buttons">
+                        <h3>Share Your Score:</h3>
+                        <button id="shareTwitter" class="share-button twitter">Twitter</button>
+                        <button id="shareFacebook" class="share-button facebook">Facebook</button>
+                        <button id="shareWhatsApp" class="share-button whatsapp">WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post-Game Ad -->
+            <div id="postGameAd" class="overlay ad-overlay">
+                <div class="overlay-content">
+                    <span class="ad-badge">Ad</span>
+                    <div class="ad-content">
+                        <h3>Try Another Game!</h3>
+                        <p>If you enjoyed Whack-a-Mole, check out our other games:</p>
+                        <div class="ad-links">
+                            <a href="../snake/index.html" class="ad-link">Snake Game</a>
+                            <a href="../memory/index.html" class="ad-link">Memory Game</a>
+                            <a href="../clicker/index.html" class="ad-link">Clicker Game</a>
+                        </div>
+                    </div>
+                    <button id="closeAd" class="close-button">✕</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Details Section -->
+        <div class="game-details">
+            <div class="game-description">
+                <h2>About Whack-a-Mole</h2>
+                <p>Whack-a-Mole is a classic arcade game that tests your reflexes and hand-eye coordination. Moles will randomly pop up from their holes, and your goal is to tap or click on them before they disappear!</p>
+                <p>The faster you whack, the higher your score. But be careful - the moles get quicker as the game progresses!</p>
+                
+                <h3>How to Play:</h3>
+                <ol>
+                    <li>Click "Start Game" to begin</li>
+                    <li>Tap or click on moles as they appear</li>
+                    <li>Each successful whack earns you points</li>
+                    <li>Try to get the highest score before time runs out</li>
+                </ol>
+            </div>
+            
+            <div class="game-stats-container">
+                <h2>Your Stats</h2>
+                <ul class="stats-list">
+                    <li>Games Played: <span id="gamesPlayed">0</span></li>
+                    <li>Best Score: <span id="bestScore">0</span></li>
+                    <li>Fastest Mole Whacked: <span id="fastestWhack">0</span> ms</li>
+                </ul>
+                
+                <h2>High Scores</h2>
+                <ol id="highScoresList">
+                    <!-- High scores will be added here -->
+                </ol>
+            </div>
+            
+            <div class="achievements-container">
+                <h2>Achievements</h2>
+                <div id="achievementsGrid" class="achievements-grid">
+                    <div class="achievement" data-achievement="firstGame">
+                        <div class="achievement-icon">🎮</div>
+                        <div class="achievement-info">
+                            <h3>First Game</h3>
+                            <p>Play your first game of Whack-a-Mole</p>
+                        </div>
+                    </div>
+                    <div class="achievement" data-achievement="score50">
+                        <div class="achievement-icon">🥉</div>
+                        <div class="achievement-info">
+                            <h3>Novice Whacker</h3>
+                            <p>Score 50 points in a single game</p>
+                        </div>
+                    </div>
+                    <div class="achievement" data-achievement="score100">
+                        <div class="achievement-icon">🥈</div>
+                        <div class="achievement-info">
+                            <h3>Mole Hunter</h3>
+                            <p>Score 100 points in a single game</p>
+                        </div>
+                    </div>
+                    <div class="achievement" data-achievement="score200">
+                        <div class="achievement-icon">🥇</div>
+                        <div class="achievement-info">
+                            <h3>Whack Master</h3>
+                            <p>Score 200 points in a single game</p>
+                        </div>
+                    </div>
+                    <div class="achievement" data-achievement="quickWhack">
+                        <div class="achievement-icon">⚡</div>
+                        <div class="achievement-info">
+                            <h3>Lightning Reflexes</h3>
+                            <p>Whack a mole in under 0.5 seconds</p>
+                        </div>
+                    </div>
+                    <div class="achievement" data-achievement="dedicated">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <h3>Dedicated Player</h3>
+                            <p>Play 10 games of Whack-a-Mole</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Home Button -->
+    <a href="../../index.html" class="floating-home-button" aria-label="Back to Home">
+        <span>🏠</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms.html">Terms of Use</a>
+                <a href="../../cookies.html">Cookie Policy</a>
+            </div>
+            <p>&copy; 2023 Dumbass Games. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

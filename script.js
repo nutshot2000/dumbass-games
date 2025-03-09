@@ -276,4 +276,92 @@ function setupAdContainers() {
             postGameAd.classList.add('visible');
         }, 60000); // Show after 1 minute for demo purposes
     }
-} 
+}
+
+// Add High Score Functions
+
+// Function to save a score
+function saveScore(gameName, playerName, score) {
+    // Get existing scores or create new array
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || {};
+    
+    // Initialize game scores if not exist
+    if (!highScores[gameName]) {
+        highScores[gameName] = [];
+    }
+    
+    // Add new score
+    highScores[gameName].push({
+        name: playerName,
+        score: score,
+        date: new Date().toISOString()
+    });
+    
+    // Sort scores (higher is better)
+    highScores[gameName].sort((a, b) => b.score - a.score);
+    
+    // Keep only top 10
+    if (highScores[gameName].length > 10) {
+        highScores[gameName] = highScores[gameName].slice(0, 10);
+    }
+    
+    // Save back to localStorage
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    
+    // Update the display
+    displayTopPlayers();
+}
+
+// Function to display top players in the sidebar
+function displayTopPlayers() {
+    const topPlayersList = document.getElementById('topPlayersList');
+    if (!topPlayersList) return;
+    
+    // Get high scores from localStorage
+    const highScores = JSON.parse(localStorage.getItem('highScores')) || {};
+    
+    // If no scores yet
+    if (Object.keys(highScores).length === 0) {
+        topPlayersList.innerHTML = '<li>No scores yet. Play a game!</li>';
+        return;
+    }
+    
+    // Clear the list
+    topPlayersList.innerHTML = '';
+    
+    // Loop through each game
+    for (const gameName in highScores) {
+        if (highScores[gameName].length > 0) {
+            // Add game header
+            const gameHeader = document.createElement('li');
+            gameHeader.className = 'game-header';
+            gameHeader.textContent = gameName;
+            topPlayersList.appendChild(gameHeader);
+            
+            // Add top 3 scores for this game
+            for (let i = 0; i < Math.min(3, highScores[gameName].length); i++) {
+                const score = highScores[gameName][i];
+                const scoreItem = document.createElement('li');
+                scoreItem.innerHTML = `${score.name}: <strong>${score.score}</strong>`;
+                topPlayersList.appendChild(scoreItem);
+            }
+        }
+    }
+}
+
+// Function to prompt user for name and save score
+function promptAndSaveScore(gameName, score) {
+    let playerName = prompt(`You scored ${score} in ${gameName}! Enter your name:`, "Player");
+    
+    // If user cancels prompt or enters empty string
+    if (playerName === null || playerName.trim() === '') {
+        playerName = "Anonymous";
+    }
+    
+    saveScore(gameName, playerName, score);
+}
+
+// Initialize top players display when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    displayTopPlayers();
+}); 

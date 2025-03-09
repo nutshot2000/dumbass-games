@@ -742,4 +742,65 @@ function showCookieSettings() {
         }));
         settingsModal.remove();
     });
-} 
+}
+
+// Add high score recording when the game ends
+// Look for the function that handles game completion and add score saving
+
+// After all cards are matched and game is complete, add this code:
+
+function gameComplete() {
+    // Calculate score based on moves (fewer moves = higher score)
+    // A simple scoring formula: 1000 - (moves * 10) + (remaining time bonus)
+    const moves = document.querySelector('.moves').textContent;
+    const timeTaken = gameTimer; // Assuming gameTimer tracks elapsed time
+    
+    // Calculate score - lower moves and faster time = higher score
+    // Base score of 1000, minus 10 points per move
+    let score = Math.max(1000 - (parseInt(moves) * 10), 100);
+    
+    // Save the score to high scores
+    // Check if parent window's promptAndSaveScore function exists
+    if (window.parent && window.parent.promptAndSaveScore) {
+        // Call the parent window's function
+        window.parent.promptAndSaveScore("Memory Game", score);
+    } else if (window.promptAndSaveScore) {
+        // Call local function if it exists
+        promptAndSaveScore("Memory Game", score);
+    } else {
+        // Fallback: Create our own function if parent doesn't have it
+        let playerName = prompt(`Congratulations! You completed the game in ${moves} moves with a score of ${score}! Enter your name:`, "Player");
+        if (playerName === null || playerName.trim() === '') {
+            playerName = "Anonymous";
+        }
+        
+        // Create score object
+        const scoreObj = {
+            name: playerName,
+            score: score,
+            date: new Date().toISOString()
+        };
+        
+        // Get existing scores
+        let highScores = JSON.parse(localStorage.getItem('highScores')) || {};
+        if (!highScores["Memory Game"]) {
+            highScores["Memory Game"] = [];
+        }
+        
+        // Add new score
+        highScores["Memory Game"].push(scoreObj);
+        
+        // Sort scores (higher is better)
+        highScores["Memory Game"].sort((a, b) => b.score - a.score);
+        
+        // Keep only top 10
+        if (highScores["Memory Game"].length > 10) {
+            highScores["Memory Game"] = highScores["Memory Game"].slice(0, 10);
+        }
+        
+        // Save back to localStorage
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+    }
+}
+
+// Call gameComplete() when the game is finished 

@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dumbass Games - Simple Fun Games</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta name="description" content="Play free, simple, and addictive games on Dumbass Games. Waste time with our collection of dumb but fun mini-games.">
+    <title>Snake Game - Dumbass Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <meta name="description" content="Play the classic Snake Game with modern controls and features. Eat the food, grow longer, and avoid hitting the walls or yourself!">
     
     <!-- SEO Meta Tags -->
-    <meta name="keywords" content="browser games, casual games, time waster games, simple games, clicker games, memory games">
+    <meta name="keywords" content="snake game, browser game, classic arcade game, snake, retro game">
     <meta name="author" content="Dumbass Games">
-    <meta property="og:title" content="Dumbass Games - Simple Fun Games">
-    <meta property="og:description" content="Play free, simple, and addictive games on Dumbass Games. Waste time with our collection of dumb but fun mini-games.">
-    <meta property="og:image" content="https://dumbassgames.xyz/images/site-preview.png">
-    <meta property="og:url" content="https://dumbassgames.xyz">
+    <meta property="og:title" content="Snake Game - Dumbass Games">
+    <meta property="og:description" content="Play the classic Snake Game with modern controls and features. Eat the food, grow longer, and avoid hitting the walls or yourself!">
+    <meta property="og:image" content="https://dumbassgames.xyz/images/snake-game.png">
+    <meta property="og:url" content="https://dumbassgames.xyz/games/snake/index.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
     <!-- Google AdSense Script - IMPORTANT: Replace with your actual AdSense code when approved -->
     <!-- Format: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    
-    <!-- AdSense Verification Placeholder - Replace with your actual verification code meta tag provided by AdSense -->
-    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
     
     <!-- Google Analytics - IMPORTANT: Replace with your actual Analytics ID -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -38,34 +35,35 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Dumbass Games",
-        "url": "https://dumbassgames.xyz",
-        "description": "Play free, simple, and addictive games on Dumbass Games. Waste time with our collection of dumb but fun mini-games.",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://dumbassgames.xyz/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+        "@type": "Game",
+        "name": "Snake Game",
+        "description": "Play the classic Snake Game with modern controls and features. Eat the food, grow longer, and avoid hitting the walls or yourself!",
+        "genre": ["Arcade", "Puzzle", "Classic Game"],
+        "gamePlayMode": "SinglePlayer",
+        "applicationCategory": "BrowserGame",
+        "url": "https://dumbassgames.xyz/games/snake/index.html",
+        "author": {
+            "@type": "Organization",
+            "name": "Dumbass Games",
+            "url": "https://dumbassgames.xyz"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
         }
     }
     </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Dumbass Games",
-        "url": "https://dumbassgames.xyz",
-        "logo": "https://dumbassgames.xyz/images/logo.png"
-    }
-    </script>
+    
+    <!-- Game Framework -->
+    <script src="../../games/game-framework.js"></script>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <h1>Dumbass Games</h1>
-            <p>Simple, fun, time-wasting games</p>
-            
-            <!-- Share and Bookmark Tools -->
+            <h1>Snake Game</h1>
+            <p>Eat, grow, and survive!</p>
             <div class="header-tools">
                 <button onclick="shareOnFacebook()" class="header-tools-button" title="Share on Facebook" aria-label="Share on Facebook">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white">
@@ -106,9 +104,10 @@
     <nav class="main-nav">
         <div class="nav-container">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../index.html#popular">Popular Games</a></li>
+                <li><a href="../../index.html#new">New Games</a></li>
+                <li><a href="../../index.html#about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -133,126 +132,156 @@
     </div>
     
     <main>
-        <section class="site-intro">
-            <h2>Welcome to Dumbass Games</h2>
-            <p>Your collection of simple, fun, and addictive browser games. No downloads, no sign-ups - just click and play!</p>
-        </section>
-        
-        <!-- Top Ad Banner -->
-        <div class="ad-container ad-in-content">
-            <div class="ad-placeholder">
-                <p>Advertisement</p>
-                <!-- IMPORTANT: Replace with your actual AdSense code -->
-                <!-- Example format for in-content ad:
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                     data-ad-slot="XXXXXXXXXX"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                -->
+        <div class="game-container" id="gameContainer">
+            <div class="game-info">
+                <h2>How to Play</h2>
+                <p>Use arrow keys or swipe to control the snake. Eat the food to grow longer, but avoid hitting the walls or your own body!</p>
+                <div class="key-hint">
+                    <span class="key">↑</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span> or swipe to move
+                </div>
+            </div>
+            
+            <div class="game-stats">
+                <div class="stats-box">
+                    <h2>Score</h2>
+                    <p id="score">0</p>
+                </div>
+                <div class="stats-box">
+                    <h2>High Score</h2>
+                    <p id="highScore">0</p>
+                </div>
+                <div class="stats-box">
+                    <h2>Level</h2>
+                    <p id="level">1</p>
+                </div>
+            </div>
+            
+            <div class="difficulty-selector">
+                <button class="difficulty-button active" data-speed="150">Easy</button>
+                <button class="difficulty-button" data-speed="100">Medium</button>
+                <button class="difficulty-button" data-speed="50">Hard</button>
+            </div>
+            
+            <div class="snake-game-board" id="snakeGameBoard">
+                <canvas id="gameCanvas"></canvas>
+                
+                <div id="gameOverScreen" class="game-over-screen">
+                    <h2>Game Over!</h2>
+                    <p>Your score: <span id="finalScore">0</span></p>
+                    <p>High score: <span id="finalHighScore">0</span></p>
+                    <button id="restartButton">Play Again</button>
+                </div>
+
+                <div id="mobileTouchControls" class="mobile-touch-controls">
+                    <button id="upButton" class="direction-button">↑</button>
+                    <div class="horizontal-buttons">
+                        <button id="leftButton" class="direction-button">←</button>
+                        <button id="rightButton" class="direction-button">→</button>
+                    </div>
+                    <button id="downButton" class="direction-button">↓</button>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="startButton">Start Game</button>
+                <button id="pauseButton" disabled>Pause</button>
+                <button id="resetButton" disabled>Reset</button>
+            </div>
+            
+            <!-- Post-Game Ad (hidden by default, shown after game completion) -->
+            <div class="ad-container ad-post-game" id="postGameAd">
+                <div class="ad-placeholder">
+                    <p>Advertisement</p>
+                    <!-- IMPORTANT: Replace with your actual AdSense code -->
+                    <!-- Example format for post-game ad:
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    -->
+                </div>
+            </div>
+            
+            <div class="game-stats-detail">
+                <div class="stats-box">
+                    <h2>Your Stats</h2>
+                    <ul>
+                        <li>Games Played: <span id="gamesPlayed">0</span></li>
+                        <li>Best Score: <span id="bestScore">0</span></li>
+                        <li>Longest Snake: <span id="longestSnake">0</span> blocks</li>
+                    </ul>
+                </div>
+                
+                <div class="high-scores">
+                    <h2>High Scores</h2>
+                    <ol id="highScoresList">
+                        <!-- High scores will be added here -->
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <h2>Share Your Score</h2>
+                <div class="share-buttons">
+                    <button id="shareTwitter" class="share-button twitter">Twitter</button>
+                    <button id="shareFacebook" class="share-button facebook">Facebook</button>
+                    <button id="shareWhatsapp" class="share-button whatsapp">WhatsApp</button>
+                </div>
+            </div>
+            
+            <div class="achievements-section">
+                <h2>Achievements</h2>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <div class="achievement locked" id="achievement-first-game">
+                        <div class="achievement-icon">🎮</div>
+                        <div class="achievement-info">
+                            <h3>First Game</h3>
+                            <p>Complete your first game</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked" id="achievement-snake-10">
+                        <div class="achievement-icon">🐍</div>
+                        <div class="achievement-info">
+                            <h3>Growing Snake</h3>
+                            <p>Reach a length of 10 blocks</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked" id="achievement-snake-20">
+                        <div class="achievement-icon">🐉</div>
+                        <div class="achievement-info">
+                            <h3>Long Snake</h3>
+                            <p>Reach a length of 20 blocks</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked" id="achievement-score-100">
+                        <div class="achievement-icon">💯</div>
+                        <div class="achievement-info">
+                            <h3>Century</h3>
+                            <p>Score 100+ points</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked" id="achievement-score-500">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <h3>Master Player</h3>
+                            <p>Score 500+ points</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked" id="achievement-dedicated">
+                        <div class="achievement-icon">👑</div>
+                        <div class="achievement-info">
+                            <h3>Dedicated</h3>
+                            <p>Play 10+ games</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <section id="games" class="games-section">
-            <h2>All Games</h2>
-            <div class="games-grid">
-                <!-- Clicker Game -->
-                <div class="game-card">
-                    <a href="games/clicker/index.html" class="card-link" aria-label="Play Clicker Game"></a>
-                    <div class="game-card-image">
-                        <img src="images/clicker-game-new.png" alt="Clicker Game">
-                        <span class="game-title-overlay">Clicker Game</span>
-                        <div class="play-overlay"></div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Clicker Game</h3>
-                        <p>Test your clicking speed! How many clicks can you make in the time limit?</p>
-                        <a href="games/clicker/index.html" class="play-button">Play Now</a>
-                    </div>
-                </div>
-                
-                <!-- Memory Game -->
-                <div class="game-card">
-                    <a href="games/memory/index.html" class="card-link" aria-label="Play Memory Game"></a>
-                    <div class="game-card-image">
-                        <img src="images/memory-game-new.png" alt="Memory Game">
-                        <span class="game-title-overlay">Memory Game</span>
-                        <div class="play-overlay"></div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Memory Game</h3>
-                        <p>Test your memory by matching pairs of cards. How quickly can you clear the board?</p>
-                        <a href="games/memory/index.html" class="play-button">Play Now</a>
-                    </div>
-                </div>
-                
-                <!-- Snake Game -->
-                <div class="game-card">
-                    <a href="games/snake/index.html" class="card-link" aria-label="Play Snake Game"></a>
-                    <div class="game-card-image">
-                        <img src="images/snake-game-new.png" alt="Snake Game">
-                        <span class="game-title-overlay">Snake Game</span>
-                        <div class="play-overlay"></div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Snake Game</h3>
-                        <p>Guide your snake to eat food and grow longer, but avoid hitting walls or yourself!</p>
-                        <a href="games/snake/index.html" class="play-button">Play Now</a>
-                    </div>
-                </div>
-                
-                <!-- Whack-a-Mole Game -->
-                <div class="game-card">
-                    <a href="games/whackamole/index.html" class="card-link" aria-label="Play Whack-a-Mole Game"></a>
-                    <div class="game-card-image">
-                        <img src="images/whackamole-game-new.png" alt="Whack-a-Mole">
-                        <span class="game-title-overlay">Whack-a-Mole</span>
-                        <div class="play-overlay"></div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Whack-a-Mole</h3>
-                        <p>Test your reflexes by whacking moles as they pop up from their holes!</p>
-                        <a href="games/whackamole/index.html" class="play-button">Play Now</a>
-                    </div>
-                </div>
-                
-                <!-- Flappy Bird Clone (Coming Soon) -->
-                <div class="game-card coming-soon">
-                    <a href="#" class="card-link" aria-label="Flappy Bird (Coming Soon)"></a>
-                    <div class="game-card-image">
-                        <img src="images/flappy-bird.png" alt="Flappy Bird Clone">
-                        <span class="game-title-overlay">Flappy Bird</span>
-                        <div class="play-overlay"></div>
-                        <div class="coming-soon-badge">Coming Soon</div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Flappy Bird Clone</h3>
-                        <p>Navigate through obstacles by tapping to control your bird's flight!</p>
-                        <a href="#" class="play-button disabled">Coming Soon</a>
-                    </div>
-                </div>
-                
-                <!-- Tic Tac Toe (Coming Soon) -->
-                <div class="game-card coming-soon">
-                    <a href="#" class="card-link" aria-label="Tic Tac Toe (Coming Soon)"></a>
-                    <div class="game-card-image">
-                        <img src="images/tic-tac-toe.png" alt="Tic Tac Toe">
-                        <span class="game-title-overlay">Tic Tac Toe</span>
-                        <div class="play-overlay"></div>
-                        <div class="coming-soon-badge">Coming Soon</div>
-                    </div>
-                    <div class="game-card-content">
-                        <h3>Tic Tac Toe</h3>
-                        <p>Play the classic game of Xs and Os against an AI opponent!</p>
-                        <a href="#" class="play-button disabled">Coming Soon</a>
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <!-- Sidebar Ad -->
         <aside class="sidebar">
@@ -275,19 +304,25 @@
             </div>
             
             <div class="sidebar-widget">
-                <h3>Top Players</h3>
-                <ul class="top-players" id="topPlayersList">
-                    <li>Loading top players...</li>
+                <h3>Other Games</h3>
+                <ul class="other-games">
+                    <li><a href="../clicker/index.html">Clicker Game</a></li>
+                    <li><a href="../memory/index.html">Memory Game</a></li>
+                    <li><a href="../../index.html#new">Whack-a-Mole (Coming Soon)</a></li>
+                    <li><a href="../../index.html#new">Flappy Bird Clone (Coming Soon)</a></li>
+                    <li><a href="../../index.html#new">Tic Tac Toe (Coming Soon)</a></li>
                 </ul>
             </div>
             
             <div class="sidebar-widget">
-                <h3>Subscribe</h3>
-                <p>Get notified when we add new games!</p>
-                <form id="subscribeForm" class="subscribe-form">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
+                <h3>Tips & Tricks</h3>
+                <ul class="tips-list">
+                    <li>Plan your route ahead of time</li>
+                    <li>Don't get too close to the walls</li>
+                    <li>Leave yourself room to maneuver</li>
+                    <li>On higher levels, focus on survival</li>
+                    <li>Practice makes perfect!</li>
+                </ul>
             </div>
             
             <div class="sidebar-widget donate-widget">
@@ -324,14 +359,6 @@
         </div>
     </div>
     
-    <section id="about" class="about-section">
-        <div class="about-content">
-            <h2>About Dumbass Games</h2>
-            <p>Dumbass Games is a collection of simple, fun, and addictive mini-games designed to help you waste time in the most entertaining way possible. Our games are easy to learn but hard to master, making them perfect for quick breaks or longer gaming sessions.</p>
-            <p>All games are free to play and work on both desktop and mobile devices. New games are added regularly, so check back often!</p>
-        </div>
-    </section>
-    
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -342,18 +369,19 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#games">Games</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html#popular">Popular Games</a></li>
+                    <li><a href="../../index.html#new">New Games</a></li>
+                    <li><a href="../../index.html#about">About</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h3>Legal</h3>
                 <ul>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="cookies.html">Cookie Policy</a></li>
+                    <li><a href="../../privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="../../terms.html">Terms of Service</a></li>
+                    <li><a href="../../cookies.html">Cookie Policy</a></li>
                 </ul>
             </div>
             
@@ -391,7 +419,7 @@
         <div class="cookie-content">
             <div class="cookie-text">
                 <h3>We Value Your Privacy</h3>
-                <p>This website uses cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as described in our <a href="cookies.html">Cookie Policy</a>.</p>
+                <p>This website uses cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as described in our <a href="../../cookies.html">Cookie Policy</a>.</p>
             </div>
             <div class="cookie-buttons">
                 <button id="cookie-accept" class="cookie-button primary">Accept All</button>
