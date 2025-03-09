@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.paypalobjects.com">
     <title>Dumbass Games - Simple Fun Games</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta name="description" content="Play free, simple, and addictive games on Dumbass Games. Waste time with our collection of dumb but fun mini-games.">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     
     <!-- SEO Meta Tags -->
     <meta name="keywords" content="browser games, casual games, time waster games, simple games, clicker games, memory games">
@@ -34,9 +42,6 @@
     <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7855285460511124" crossorigin="anonymous"></script>
     
-    <!-- AdSense Verification Placeholder - Replace with your actual verification code meta tag provided by AdSense -->
-    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
-    
     <!-- Structured Data for better SEO -->
     <script type="application/ld+json">
     {
@@ -58,7 +63,12 @@
         "@type": "Organization",
         "name": "Dumbass Games",
         "url": "https://dumbassgames.xyz",
-        "logo": "https://dumbassgames.xyz/images/logo.png"
+        "logo": "https://dumbassgames.xyz/images/logo.png",
+        "sameAs": [
+            "https://facebook.com/dumbassgames",
+            "https://twitter.com/dumbassgames",
+            "https://instagram.com/dumbassgames"
+        ]
     }
     </script>
 </head>
@@ -167,7 +177,7 @@
                 <div class="game-card">
                     <a href="games/clicker/index.html" class="card-link" aria-label="Play Clicker Game"></a>
                     <div class="game-card-image">
-                        <img src="images/clicker-game-new.png" alt="Clicker Game">
+                        <img src="images/clicker-game-new.png" alt="Clicker Game" loading="lazy">
                         <span class="game-title-overlay">Clicker Game</span>
                         <div class="play-overlay"></div>
                     </div>
@@ -182,7 +192,7 @@
                 <div class="game-card">
                     <a href="games/memory/index.html" class="card-link" aria-label="Play Memory Game"></a>
                     <div class="game-card-image">
-                        <img src="images/memory-game-new.png" alt="Memory Game">
+                        <img src="images/memory-game-new.png" alt="Memory Game" loading="lazy">
                         <span class="game-title-overlay">Memory Game</span>
                         <div class="play-overlay"></div>
                     </div>
@@ -197,7 +207,7 @@
                 <div class="game-card">
                     <a href="games/snake/index.html" class="card-link" aria-label="Play Snake Game"></a>
                     <div class="game-card-image">
-                        <img src="images/snake-game-new.png" alt="Snake Game">
+                        <img src="images/snake-game-new.png" alt="Snake Game" loading="lazy">
                         <span class="game-title-overlay">Snake Game</span>
                         <div class="play-overlay"></div>
                     </div>
@@ -212,7 +222,7 @@
                 <div class="game-card">
                     <a href="games/whackamole/index.html" class="card-link" aria-label="Play Whack-a-Mole Game"></a>
                     <div class="game-card-image">
-                        <img src="images/whackamole-game-new.png" alt="Whack-a-Mole">
+                        <img src="images/whackamole-game-new.png" alt="Whack-a-Mole" loading="lazy">
                         <span class="game-title-overlay">Whack-a-Mole</span>
                         <div class="play-overlay"></div>
                     </div>
@@ -227,7 +237,7 @@
                 <div class="game-card coming-soon">
                     <a href="#" class="card-link" aria-label="Flappy Bird (Coming Soon)"></a>
                     <div class="game-card-image">
-                        <img src="images/flappy-bird.png" alt="Flappy Bird Clone">
+                        <img src="images/flappy-bird.png" alt="Flappy Bird Clone" loading="lazy">
                         <span class="game-title-overlay">Flappy Bird</span>
                         <div class="play-overlay"></div>
                         <div class="coming-soon-badge">Coming Soon</div>
@@ -243,7 +253,7 @@
                 <div class="game-card coming-soon">
                     <a href="#" class="card-link" aria-label="Tic Tac Toe (Coming Soon)"></a>
                     <div class="game-card-image">
-                        <img src="images/tic-tac-toe.png" alt="Tic Tac Toe">
+                        <img src="images/tic-tac-toe.png" alt="Tic Tac Toe" loading="lazy">
                         <span class="game-title-overlay">Tic Tac Toe</span>
                         <div class="play-overlay"></div>
                         <div class="coming-soon-badge">Coming Soon</div>
@@ -405,5 +415,23 @@
     </div>
     
     <script src="script.js"></script>
+    
+    <!-- WebP Support Detection -->
+    <script>
+        // Check for WebP support
+        function checkWebpSupport() {
+            const webpImage = new Image();
+            webpImage.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+            webpImage.onload = function() {
+                const webpSupported = (webpImage.width > 0) && (webpImage.height > 0);
+                if (webpSupported) {
+                    document.documentElement.classList.add('webp-support');
+                } else {
+                    document.documentElement.classList.add('no-webp-support');
+                }
+            };
+        }
+        checkWebpSupport();
+    </script>
 </body>
 </html> 
