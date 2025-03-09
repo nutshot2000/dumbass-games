@@ -21,6 +21,7 @@
     --card-back: #2a2a2a;
     --card-front: #4ecdc4;
     --card-matched: #ff6b6b;
+    --card-pattern: #6c5ce7;
     
     /* Achievement colors */
     --achievement-locked: #333;
@@ -306,6 +307,39 @@ main {
 .memory-card-back {
     background-color: var(--card-back);
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.memory-card-back::before {
+    content: "DG";
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--secondary-color);
+    opacity: 0.3;
+    letter-spacing: -2px;
+}
+
+.memory-card-back::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    opacity: 0.15;
+}
+
+.card-back-design {
+    display: none;
 }
 
 .memory-card.matched .memory-card-front {
