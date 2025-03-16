@@ -132,7 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
             card.innerHTML = `
                 <div class="memory-card-inner">
                     <div class="memory-card-front">${value}</div>
-                    <div class="memory-card-back"></div>
+                    <div class="memory-card-back">
+                        <div class="card-back-design"></div>
+                    </div>
                 </div>
             `;
             
