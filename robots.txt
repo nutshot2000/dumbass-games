@@ -1,13 +1,3 @@
-# robots.txt for dumbassgames.xyz
 User-agent: *
-Allow: /
-
-# Allow crawling of all content
-Disallow: 
-
-# Indicate where sitemap is located
+Disallow:
 Sitemap: https://dumbassgames.xyz/sitemap.xml
-
-# Prevent crawling of admin areas - add these if they exist in the future
-# Disallow: /admin/
-# Disallow: /wp-admin/ 

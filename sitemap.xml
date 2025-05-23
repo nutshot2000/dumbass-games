@@ -2,50 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dumbassgames.xyz/</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/games/clicker/index.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/games/memory/index.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/games/snake/index.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/games/whackamole/index.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/privacy-policy.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dumbassgames.xyz/terms.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://dumbassgames.xyz/cookies.html</loc>
-    <lastmod>2025-03-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
   </url>
-</urlset> 
+  <url>
+    <loc>https://dumbassgames.xyz/privacy-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/games/clicker/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/games/memory/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/games/snake/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/games/sudoku/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dumbassgames.xyz/games/whackamole/index.html</loc>
+  </url>
+</urlset>
