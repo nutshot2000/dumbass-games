@@ -19,7 +19,7 @@
       --card-shadow: #FFD14033;
       --accent: #FFD140;
     }
-    body.theme-default {
+    body.theme-classic {
       --primary: #FFD140;
       --primary-dark: #23272e;
       --primary-light: #fffbe6;
@@ -463,7 +463,7 @@
       <div class="theme-dropdown">
         <button class="theme-dropdown-btn">Select Theme</button>
         <div class="theme-dropdown-list">
-          <button class="theme-dropdown-option" data-theme="default">Default</button>
+          <button class="theme-dropdown-option" data-theme="classic">Classic</button>
           <button class="theme-dropdown-option" data-theme="neon">Neon</button>
           <button class="theme-dropdown-option" data-theme="pastel">Pastel</button>
           <button class="theme-dropdown-option" data-theme="ocean">Ocean</button>
@@ -632,13 +632,22 @@
         });
       }, originalText.length * 100 + 800);
     });
+    const themeDisplayNames = {
+      classic: 'Classic',
+      neon: 'Neon',
+      pastel: 'Pastel',
+      ocean: 'Ocean',
+      forest: 'Forest',
+      retro: 'Retro',
+      solarized: 'Solarized'
+    };
     function setTheme(theme) {
-      body.classList.remove('theme-default', 'theme-neon', 'theme-pastel', 'theme-ocean', 'theme-forest', 'theme-retro', 'theme-solarized');
+      body.classList.remove('theme-classic', 'theme-neon', 'theme-pastel', 'theme-ocean', 'theme-forest', 'theme-retro', 'theme-solarized');
       body.classList.add('theme-' + theme);
       localStorage.setItem('dumbassgames-theme', theme);
       themeOptions.forEach(btn => btn.classList.remove('active'));
       document.querySelector('.theme-dropdown-option[data-theme="' + theme + '"]').classList.add('active');
-      themeDropdownBtn.textContent = `Theme ▾`;
+      themeDropdownBtn.textContent = `${themeDisplayNames[theme]} ▾`;
     }
     themeOptions.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -655,8 +664,13 @@
         themeDropdown.classList.remove('open');
       }
     });
-    // On load, set theme from localStorage or default
-    const savedTheme = localStorage.getItem('dumbassgames-theme') || 'default';
+    // On load, migrate old 'default' theme to 'classic'
+    let savedTheme = localStorage.getItem('dumbassgames-theme');
+    if (savedTheme === 'default') {
+      savedTheme = 'classic';
+      localStorage.setItem('dumbassgames-theme', 'classic');
+    }
+    if (!savedTheme) savedTheme = 'neon';
     setTheme(savedTheme);
   </script>
 </body>
